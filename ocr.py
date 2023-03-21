@@ -1,8 +1,7 @@
 import easyocr as ocr  #OCR
 import streamlit as st  #Web App
 from PIL import Image #Image Processing
-import numpy as np #Image Processing
-import requests
+import numpy as np #Image Processing 
 
 #title
 st.title("OCR - Extract Text from Images")
@@ -25,27 +24,21 @@ image = st.file_uploader(label = "Upload your image here",type=['png','jpg','jpe
 
 if image is not None:
 
-    # input_image = Image.open(image) #read image
-    # st.image(input_image) #display image
+    input_image = Image.open(image) #read image
+    st.image(input_image) #display image
 
-    # with st.spinner("Working! "):
+    with st.spinner("Working! "):
         
 
-    #     result = reader.readtext(np.array(input_image))
+        result = reader.readtext(np.array(input_image))
 
-    #     result_text = [] #empty list for results
+        result_text = [] #empty list for results
 
 
-    #     for text in result:
-    #         result_text.append(text[1])
+        for text in result:
+            result_text.append(text[1])
 
-        # st.write(result_text)
-
-    api_url = 'https://api.api-ninjas.com/v1/imagetotext'
-    files = {'image': image}
-    r = requests.post(api_url, files=files)
-
-    st.write(r.json())
+        st.write(result_text)
         
     st.balloons()
 else:
